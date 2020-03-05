@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <title>Home work 2 Roman Makarenko</title>
+        <script>
+            window.onload = () => {
+                const input = document.getElementById("inputField");
+                const output = document.getElementById("inputResponse");
+                const btn = document.getElementById("inputSubmit");
+
+                const filesOutput = document.getElementById("filesOutput");
+                const btn2 = document.getElementById("filesSubmit");
+                let getValue = function () {
+                    const request = new XMLHttpRequest();
+                    request.open('POST', '/min');
+                    request.onload = function() {
+                        if (request.status === 202) {
+                            alert(this.responseText)
+                        } else {
+                            output.innerHTML = this.responseText;
+                        }
+                    };
+                    request.onerror = () => {
+                        console.log('Error');
+                    };
+                    request.send(input.value);
+                };
+                let getDocsList = function () {
+                    const request = new XMLHttpRequest();
+                    request.open('POST', '/dir');
+                    request.onload = function() {
+                        filesOutput.innerHTML = this.responseText;
+                    };
+                    request.onerror = () => {
+                        console.log('Error');
+                    };
+                    request.send();
+                };
+                btn.addEventListener('click', getValue);
+                btn2.addEventListener('click', getDocsList);
+            };
+        </script>
+    </head>
+    <body>
+        <label for="inputField" placeholder="Your array">Set array of numbers with comma separator</label>
+        <input id="inputField">
+        <button id="inputSubmit">Submit</button>
+        <label for="inputResponse" placeholder="Min element">Minimum value in array = </label>
+        <output id="inputResponse"></output>
+        <br/>
+        <label for="filesOutput" placeholder="Your files">List of documents in your dir</label>
+        <button id="filesSubmit">Get list of docs</button>
+        <br/>
+        <output id="filesOutput"></output>
+    </body>
+</html>
