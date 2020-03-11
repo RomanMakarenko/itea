@@ -21,7 +21,7 @@ app.route('/order/create')
     .post((req, res) => {
         console.log('=========4=========')
         const orderBody = req.body;
-        const newId = Object.keys(res.locals.db).length + 1;
+        const newId = Object.keys(res.locals.db).length + 2;
         res.locals.db[newId] = {item: orderBody};
         fs.writeFile(path.join(__dirname, 'db.json'), JSON.stringify(res.locals.db), (err) => {
             if (err) console.log(err);
