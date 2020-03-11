@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Homework 3 Makarenko Roman</title>
+    <script>
+        window.onload = function() {
+            // create order info part
+            const createOrderBtn = document.getElementById("createOrderBtn");
+            const createOrderInput = document.getElementById("createOrderInput");
+            const createOrderResultOutput = document.getElementById("createOrderResultOutput");
+            function createOrder() {
+                const newBody = createOrderInput.value;
+                const options = {
+                    method: "POST",
+                    body: newBody,
+                };
+                fetch(`/order/create`, options)
+                    .then(res => res.text())
+                    .then(data => {
+                        createOrderResultOutput.innerText = data;
+                    });
+            }
+            // delete order info part
+            const deleteOrderBtn = document.getElementById("deleteOrderBtn");
+            const deleteOrderIdInput = document.getElementById("deleteOrderIdInput");
+            const deleteResultOutput = document.getElementById("deleteResultOutput");
+            function deleteOrder() {
+                const id = deleteOrderIdInput.value;
+                const options = {
+                    method: "DELETE",
+                };
+                fetch(`/order/${id}`, options)
+                    .then(res => res.text())
+                    .then(data => {
+                        deleteResultOutput.innerText = data;
+                    });
+            }
+            // update order info part
+            const updateOrderInfoBtn = document.getElementById("updateOrderInfoBtn");
+            const updateOrderBodyInput = document.getElementById("updateOrderBodyInput");
+            const updateOrderIdInput = document.getElementById("updateOrderIdInput");
+            const updatedOrderInfoOutput = document.getElementById("updatedOrderInfoOutput");
+            function updateOrderInfo() {
+                const id = updateOrderIdInput.value;
+                const newBody = updateOrderBodyInput.value;
+                const options = {
+                    method: "PUT",
+                    body: newBody,
+                };
+                fetch(`/order/${id}`, options)
+                    .then(res => res.text())
+                    .then(data => {
+                        updatedOrderInfoOutput.innerText = data;
+                    });
+            }
+            // get order info part
+            const getOrderInfoBtn = document.getElementById("getOrderInfoBtn");
+            const orderInfoIdInput = document.getElementById("orderInfoIdInput");
+            const orderInfoOutput = document.getElementById("orderInfoOutput");
+            function getOrderInfo() {
+                const id = orderInfoIdInput.value;
+                const options = {
+                    method: "GET"
+                };
+                fetch(`/order/${id}`, options)
+                    .then(res => res.text())
+                    .then(data => {
+                        orderInfoOutput.innerText = data;
+                    });
+            }
+            // get order info part
+            getOrderInfoBtn.addEventListener('click', getOrderInfo);
+            // update order info part
+            updateOrderInfoBtn.addEventListener('click', updateOrderInfo);
+            // delete order info part
+            deleteOrderBtn.addEventListener('click', deleteOrder);
+            // create order info part
+            createOrderBtn.addEventListener('click', createOrder);
+        }
+    </script>           
+</head>
+<body>
+    <h3>Pizza menu</h3>
+    <ul>
+        <li>Margarita</li>
+        <li>Vegan</li>
+        <li>Country</li>
+        <li>Spicy</li>
+    </ul>
+    <br/>
+    <h3>Create order</h3>
+    <form>
+        <div class="form-group">
+            <label for="createOrderInput">Create new order</label>
+            <input id="createOrderInput" class="form-control">
+            <button id="createOrderBtn" type="button" class="btn btn-warning btn-block">POST</button>
+            <div id="createOrderResultOutput" class="well"></div>
+        </div>
+    </form>
+    <br/>
+    <h3>Delete order</h3>
+    <form>
+        <div class="form-group">
+            <label for="deleteOrderIdInput">Select order for delete by id</label>
+            <input id="deleteOrderIdInput" class="form-control">
+            <button id="deleteOrderBtn" type="button" class="btn btn-warning btn-block">DELETE</button>
+            <div id="deleteResultOutput" class="well"></div>
+        </div>
+    </form>
+    <br/>
+    <h3>Update order</h3>
+    <form>
+        <div class="form-group">
+            <label for="updateOrderBodyInput">Set new order</label>
+            <input id="updateOrderBodyInput" class="form-control">
+            <label for="updateOrderIdInput">Select orderID</label>
+            <input id="updateOrderIdInput" class="form-control">
+            <button id="updateOrderInfoBtn" type="button" class="btn btn-warning btn-block">UPDATE</button>
+            <div id="updatedOrderInfoOutput" class="well"></div>
+        </div>
+    </form>
+    <br/>
+    <h3>Show order information</h3>
+    <form>
+        <div class="form-group">
+            <label for="orderInfoIdInput">Select order info by id</label>
+            <input id="orderInfoIdInput" class="form-control">
+            <button id="getOrderInfoBtn" type="button" class="btn btn-warning btn-block">GET</button>
+            <div id="orderInfoOutput" class="well"></div>
+        </div>
+    </form>
+</body>
+</html>
