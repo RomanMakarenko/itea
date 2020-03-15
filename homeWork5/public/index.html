@@ -1,7 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Homework 4 Makarenko Roman</title>
+    <style>
+        .column {
+            float: left;
+            width: 25%;
+        }
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+    <title>Homework 5 Makarenko Roman</title>
     <script>
         window.onload = function() {
             // create order info part
@@ -80,13 +91,48 @@
     </script>           
 </head>
 <body>
-    <h3>Pizza menu</h3>
-    <ul>
-        <li>Margarita</li>
-        <li>Vegan</li>
-        <li>Country</li>
-        <li>Spicy</li>
-    </ul>
+    <h2>Menu</h2>
+    
+    <div class="row">
+        <div class="column">
+            <h3>Pasta</h3>
+            <ul>
+                <li>Cannelloni</li>
+                <li>Rigatoni</li>
+                <li>Fettuccine</li>
+                <li>Linguine</li>
+                <li>Pappardelle</li>
+            </ul>
+        </div>
+        <div class="column">
+            <h3>Pizza</h3>
+            <ul>
+                <li>Margarita</li>
+                <li>Vegan</li>
+                <li>Country</li>
+                <li>Spicy</li>
+                <li>Hawaiian</li>
+            </ul>
+        </div>
+        <div class="column" >
+            <h3>Desserts</h3>
+            <ul>
+                <li>Tiramisu</li>
+                <li>Cannoli</li>
+                <li>Panna cotta</li>
+                <li>Cassata</li>
+            </ul>
+        </div>
+        <div class="column" >
+                <h3>Drinks</h3>
+                <ul>
+                    <li>Coca-cola</li>
+                    <li>Tea</li>
+                    <li>Coffee</li>
+                    <li>Water</li>
+                </ul>
+            </div>
+    </div>
     <br/>
     <h3>Create order</h3>
     <form>
