@@ -16,6 +16,7 @@ app.use(bodyParser.text());
 app.use('/', express.static('public'));
 app.use(routers.OrderRouter);
 app.use(routers.UserRouter);
+app.use(routers.LoginRouter);
 
 mongoose.connect(urlDb, {
     useNewUrlParser   : true,
