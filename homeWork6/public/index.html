@@ -46,6 +46,11 @@
                     .then(res => res.text())
                     .then(data => {
                         loginUserResultOutput.innerText = data;
+                        if (JSON.parse(data).token === undefined) {
+                            localStorage.clear();
+                        } else {
+                            localStorage.setItem('token', JSON.parse(data).token)
+                        }
                     });
             }
             // create order info part
