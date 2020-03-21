@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Homework 6 Makarenko Roman</title>
+    <script>
+        window.onload = function() {
+            const emailInput = document.getElementById("createUserMailInput");
+            const passInput = document.getElementById("createUserPassInput");
+            function createNewUser() {
+                const newUser = {
+                    email: emailInput.value,
+                    password: passInput.value,
+                }
+                const options = {
+                    method: "POST",
+                    body: JSON.stringify(newUser),
+                };
+                fetch(`/user/create`, options)
+                    .then(res => res.text())
+                    .then(data => {
+                        createUserResultOutput.innerText = data;
+                    });
+            }
+            function loginUser() {
+                const loginUser = {
+                    email: emailInput.value,
+                    password: passInput.value,
+                }
+                const options = {
+                    method: "POST",
+                    body: JSON.stringify(loginUser),
+                };
+                fetch(`/user/login`, options)
+                    .then(res => res.text())
+                    .then(data => {
+                        loginUserResultOutput.innerText = data;
+                    });
+            }
+            createUserBtn.addEventListener('click', createNewUser);
+            loginUserBtn.addEventListener('click', loginUser);
+        }
+    </script>           
+</head>
+<body>
+    <h2>Registration/Login</h2>
+    <h3>Set your credential</h3>
+    <form>
+        <div class="form-group">
+            <label for="createUserMailInput">E-mail</label>
+            <input id="createUserMailInput" class="form-control">
+            <label for="createUserPassInput">Password</label>
+            <input id="createUserPassInput" class="form-control">
+            <button id="createUserBtn" type="button" class="btn btn-warning btn-block">CREATE USER</button>
+            <button id="loginUserBtn" type="button" class="btn btn-warning btn-block">LOGIN USER</button>
+            <div id="createUserResultOutput" class="well"></div>
+            <div id="loginUserResultOutput" class="well"></div>
+        </div>
+    </form>
+</body>
+</html>
