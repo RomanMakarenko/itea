@@ -58,31 +58,41 @@
             const createOrderInput = document.getElementById("createOrderInput");
             const createOrderResultOutput = document.getElementById("createOrderResultOutput");
             function createOrder() {
-                const newBody = createOrderInput.value;
-                const options = {
-                    method: "POST",
-                    body: newBody,
-                };
-                fetch(`/order/create`, options)
-                    .then(res => res.text())
-                    .then(data => {
-                        createOrderResultOutput.innerText = data;
-                    });
+                const authorized = localStorage.getItem('token');
+                if (authorized !== null) {
+                    const newBody = createOrderInput.value;
+                    const options = {
+                        method: "POST",
+                        body: newBody,
+                    };
+                    fetch(`/order/create`, options)
+                        .then(res => res.text())
+                        .then(data => {
+                            createOrderResultOutput.innerText = data;
+                        });
+                } else {
+                    alert('Only authorized user can create order')
+                }
             }
             // delete order info part
             const deleteOrderBtn = document.getElementById("deleteOrderBtn");
             const deleteOrderIdInput = document.getElementById("deleteOrderIdInput");
             const deleteResultOutput = document.getElementById("deleteResultOutput");
             function deleteOrder() {
-                const id = deleteOrderIdInput.value;
-                const options = {
-                    method: "DELETE",
-                };
-                fetch(`/order/${id}`, options)
-                    .then(res => res.text())
-                    .then(data => {
-                        deleteResultOutput.innerText = data;
-                    });
+                const authorized = localStorage.getItem('token');
+                if (authorized !== null) {
+                    const id = deleteOrderIdInput.value;
+                    const options = {
+                        method: "DELETE",
+                    };
+                    fetch(`/order/${id}`, options)
+                        .then(res => res.text())
+                        .then(data => {
+                            deleteResultOutput.innerText = data;
+                        });
+                } else {
+                    alert('Only authorized user can delete order')
+                }
             }
             // update order info part
             const updateOrderInfoBtn = document.getElementById("updateOrderInfoBtn");
@@ -90,17 +100,22 @@
             const updateOrderIdInput = document.getElementById("updateOrderIdInput");
             const updatedOrderInfoOutput = document.getElementById("updatedOrderInfoOutput");
             function updateOrderInfo() {
-                const id = updateOrderIdInput.value;
-                const newBody = updateOrderBodyInput.value;
-                const options = {
-                    method: "PUT",
-                    body: newBody,
-                };
-                fetch(`/order/${id}`, options)
-                    .then(res => res.text())
-                    .then(data => {
-                        updatedOrderInfoOutput.innerText = data;
-                    });
+                const authorized = localStorage.getItem('token');
+                if (authorized !== null) {
+                    const id = updateOrderIdInput.value;
+                    const newBody = updateOrderBodyInput.value;
+                    const options = {
+                        method: "PUT",
+                        body: newBody,
+                    };
+                    fetch(`/order/${id}`, options)
+                        .then(res => res.text())
+                        .then(data => {
+                            updatedOrderInfoOutput.innerText = data;
+                        });
+                } else {
+                    alert('Only authorized user can update order')
+                }
             }
             // get order info part
             const getOrderInfoBtn = document.getElementById("getOrderInfoBtn");

@@ -5,10 +5,10 @@ const secretKey = "secret";
 const loginUser = (req, res) => {
     const user = JSON.parse(req.body);
     console.log(user.email)
-    console.log(user.password)
+    console.log(user.password);
     models.User.findOne({email: user.email}, (err, data) => {
         if(err) console.log(err);
-        if((user !== null) && (user.password == data.password)) {
+        if((user !== null) && (data !== null) && (user.password == data.password)) {
             const token = jwt.sign({ email: data.email }, secretKey, {expiresIn: '1h'});
             res.status(200).json({token: token}).end();
         } else {
